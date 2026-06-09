@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "id": "group-quotes.group-quotes",
+  "id": "github.pan-ice.plugins-uumessage",
   "version": "1.0.0",
   "name": "群友语录",
   "description": "群聊图片投稿与随机语录，支持群组数据隔离。回复图片发送 /投稿 即可投稿，发送 /群友语录 随机获取一条语录。",
@@ -10,7 +10,10 @@
   },
   "license": "MIT",
   "urls": {
-    "repository": "https://github.com/pan-ice/plugins-uumessage"
+    "repository": "https://github.com/pan-ice/plugins-uumessage",
+    "homepage": "https://github.com/pan-ice/plugins-uumessage",
+    "documentation": "https://github.com/pan-ice/plugins-uumessage/blob/main/README.md",
+    "issues": "https://github.com/pan-ice/plugins-uumessage/issues"
   },
   "host_application": {
     "min_version": "1.0.0",
