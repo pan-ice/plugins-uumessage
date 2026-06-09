@@ -241,7 +241,7 @@ class GroupQuotesPlugin(MaiBotPlugin):
             await self.ctx.send.text("这张图片已经投稿过了", stream_id)
             return False, "重复投稿", True
 
-        # 11. 超出上限时清理最旧记录
+        # 11. 超出上限时清理最旧记录（同时删除图片文件）
         max_quotes = self.config.limits.max_quotes_per_group
         cursor = self._db.execute(
             "SELECT COUNT(*) FROM group_quotes WHERE group_id = ?",
@@ -249,6 +249,20 @@ class GroupQuotesPlugin(MaiBotPlugin):
         )
         count = cursor.fetchone()[0]
         if count > max_quotes:
+            excess = count - max_quotes
+            # 先查出要删除的记录的文件路径
+            stale_cursor = self._db.execute(
+                """
+                SELECT image_path FROM group_quotes
+                WHERE group_id = ?
+                ORDER BY created_at ASC LIMIT ?
+                """,
+                (group_id, excess),
+            )
+            for row in stale_cursor:
+                stale_path = row[0]
+                if stale_path and os.path.isfile(stale_path):
+                    os.remove(stale_path)
             self._db.execute(
                 """
                 DELETE FROM group_quotes WHERE group_id = ? AND id IN (
@@ -257,7 +271,7 @@ class GroupQuotesPlugin(MaiBotPlugin):
                     ORDER BY created_at ASC LIMIT ?
                 )
                 """,
-                (group_id, group_id, count - max_quotes),
+                (group_id, group_id, excess),
             )
             self._db.commit()
 
