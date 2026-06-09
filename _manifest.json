@@ -1,0 +1,33 @@
+{
+  "manifest_version": 2,
+  "id": "group-quotes.group-quotes",
+  "version": "1.0.0",
+  "name": "群友语录",
+  "description": "群聊图片投稿与随机语录，支持群组数据隔离。回复图片发送 /投稿 即可投稿，发送 /群友语录 随机获取一条语录。",
+  "author": {
+    "name": "group-quotes",
+    "url": "https://github.com/group-quotes"
+  },
+  "license": "MIT",
+  "urls": {
+    "repository": "https://github.com/group-quotes/group-quotes"
+  },
+  "host_application": {
+    "min_version": "1.0.0",
+    "max_version": "1.99.99"
+  },
+  "sdk": {
+    "min_version": "2.0.0",
+    "max_version": "2.99.99"
+  },
+  "dependencies": [],
+  "capabilities": [
+    "send.text",
+    "send.image",
+    "message.get_by_id"
+  ],
+  "i18n": {
+    "default_locale": "zh-CN",
+    "supported_locales": ["zh-CN"]
+  }
+}
