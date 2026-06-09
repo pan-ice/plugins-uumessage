@@ -269,7 +269,7 @@ class GroupQuotesPlugin(MaiBotPlugin):
     @Command(
         "random_quote",
         description="随机获取一条群友语录",
-        pattern=r"/群友语录",
+        pattern=r"/群友语录|/uu语录|/群u语录",
     )
     async def handle_random_quote(
         self,
